@@ -1,7 +1,6 @@
 package donCangrejo
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
-import donCangrejo.Rol
 
 @Transactional(readOnly = true)
 class UsuarioController {

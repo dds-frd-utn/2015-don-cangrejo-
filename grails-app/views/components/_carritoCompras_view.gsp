@@ -4,7 +4,7 @@
 	<div class="modal-content">
 	  <h4>Carrito de Compras</h4>
 	  
-	    <div id="carrito-lst" class="collection" style="text-align: center; ">
+	    <div id="carrito-lst" class="collection" style="text-align: center;">
 	    	%{-- Logica Java --}%
 	    	<%try {
 	    			def smgr = new SessionManager(request.session)
@@ -13,21 +13,23 @@
 	    			def productosPedido = c.pedidos.producto
 	    			def cantidadProducto = c.pedidos.cantidad
 		    %>
-		   	    <g:each var="pedido" in="${pedidosCarrito}">
-			      	<a href="#!" id="${pedido.producto.id}" class="collection-item" style="background-color:#A90A0A">
-			      		<table>
-			      		<td id="${pedido.producto.id}">${pedido.producto.nombre}</td>
-			      		<td id="preciosprod">${pedido.producto.precio}</td>
-			      		<td id="cantidadprod">${pedido.cantidad}</td>
-			      		<span id="${pedido.producto.id}" class="delete-elem badge" style="background-color:#A90A0A">Borrar</span>
-			      		</table>
-			      	</a>
-		        </g:each>
-		        <td>Total:
-		        <%
-		        	println(c.total())
-		        %>
-		        </td>
+			<div class="row" class="collection-item" style="background:#750000; margin-bottom:0px">
+				<div class="col s3">Producto</div>
+				<div class="col s3">Precio</div>
+				<div class="col s3">Cantidad</div>
+				<div class="col s3">Borrar</div>
+			</div>
+		   	<g:each var="pedido" in="${pedidosCarrito}">
+			  	<a id="${pedido.producto.id}" class="collection-item row" style="background-color:#A90A0A; color:white">
+			  		<div class="col s3" id="productonombre">${pedido.producto.nombre} </div>
+			  		<div class="col s3" id="preciosprod">${pedido.producto.precio} </div>
+			  		<div class="col s3" id="cantidadprod">${pedido.cantidad} </div>
+			  		<div class="col s3" id="delete-elem">
+						  <span id="${pedido.producto.id}" class="delete-elem"><i class="material-icons">delete</i></span>
+					</div>
+			  	</a>
+		    </g:each>
+		    <td><div class="collection-item" style="background-color:#750000">Total: <% println(c.total()) %> </div></td>
 	        <%}catch(Exception e){
 	    		println("No hay productos")			
 	    	}%>
@@ -66,16 +68,17 @@ $("#checkOut").click(function(){
 });
 
 $(".delete-elem").click(function(){
-		
-		var productoId = parseInt( $(this).attr('id') );
+	var productoId = parseInt( $(this).attr('id') );
+	$("#"+productoId).hide(300);
+	var time = 1000;
+	$.ajax( "/don-cangrejo/borrar/"+productoId ).done(function( resp ){	
+	Materialize.toast('Producto eliminado', time);
+	var time2 = 1500
+	setTimeout("location.reload(true);", time2);
+	});	
+});
 
-		$("#"+productoId).hide(300);
-		var time = 1000;
-		$.ajax( "/don-cangrejo/borrar/"+productoId ).done(function( resp ){	
-		Materialize.toast('Producto eliminado', time);
-		var time2 = 1500
-		setTimeout("location.reload(true);", time2);
-		});
-			
-	});
+$(".delete-elem").hover(function(){
+	$(this).css('cursor','pointer');
+});
 </script>

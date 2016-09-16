@@ -82,7 +82,7 @@
 
   <div align=center>
     <div>
-      <!-- <i class="large material-icons" href="/don-cangrejo/producto/index"><a id="registerLink" class="modal-trigger"  href="/don-cangrejo/producto/index" style="color:#FFAB40">store</a></i> -->
+      <i class="large material-icons" href="/don-cangrejo/producto/index"><a id="registerLink" class="modal-trigger"  href="/don-cangrejo/producto/index" style="color:#FFAB40">store</a></i>
        
      <!-- Activar Dropdown de Carrito de Compras -->
            

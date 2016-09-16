@@ -2,7 +2,7 @@ package donCangrejo
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+@Transactional
 class UsuarioController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -33,7 +33,6 @@ class UsuarioController {
         }
 
         usuarioInstance.save flush:true
-        //usuarioInstance.inicializarUser()
         
         //Una vez que lo guarda volvemos a la pagina principal
         redirect(uri: "")

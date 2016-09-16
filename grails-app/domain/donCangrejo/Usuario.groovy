@@ -1,5 +1,4 @@
 package donCangrejo
-import donCangrejo.Rol
 
 class Usuario {
 

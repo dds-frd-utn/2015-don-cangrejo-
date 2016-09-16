@@ -25,8 +25,8 @@ class CarritoController {
         try {
             if (total > 0){
                 Carrito.executeUpdate(
-                        "update Carrito set estado = (:nuevoEstado) where usuario = (:usuarioId)",
-                        [nuevoEstado: nuevoEst, usuarioId: c.usuario])
+                        "update Carrito set estado = (:nuevoEstado), fecha = (:nuevaFecha) where usuario = (:usuarioId) and estado = (:viejoEstado)",
+                        [nuevoEstado: nuevoEst, nuevaFecha: f, usuarioId: c.usuario, viejoEstado: "p"])
                 println("Realice el update con Exito")
                 //Generar el nuevo Carrito con estado "p"
                 smgr.nuevoCarrito()
